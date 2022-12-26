@@ -9,7 +9,7 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # system dependencies
 ENV NODE_VERSION=16.8.0
 RUN apt update
-RUN apt install -y curl git gcc python3-dev
+RUN apt install -y curl git gcc python3-dev g++ libjpeg-dev libjpeg-progs libjpeg-tools libopenjp2-7 libopenjp2-7-dev
 
 # python dependencies
 COPY ./requirements.txt .
