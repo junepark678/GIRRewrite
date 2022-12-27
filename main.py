@@ -163,8 +163,8 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member: Member):
-    await member.add_roles(member.guild.get_role("1056979454179676262"))
-    await member.add_roles(member.guild.get_role("1056979446424403968"))
+    await member.add_roles(member.guild.get_role(1056979454179676262))
+    await member.add_roles(member.guild.get_role(1056979446424403968))
 
 async def main():
     async with bot:
