@@ -20,8 +20,8 @@ def derive_label(string):
 
     middle = " ".join(re.findall(
         r'[A-Z0-9](?:[a-z0-9]+|[A-Z0-9]*(?=[A-Z0-9]|$))', string))
-    return f"{starter}{middle} {enders.get(string) or 'Updates'}"
-
+    #return f"{starter}{middle} {enders.get(string)}"
+    return string # FUCK OFF
 
 class ReactionRoleButton(discord.ui.Button):
     def __init__(self, role: discord.Role, emoji: discord.Emoji):
@@ -36,7 +36,7 @@ class ReactionRoleButton(discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         if role not in user.roles:
             await user.add_roles(role)
-            await interaction.followup.send(f"{self.emoji} You have been given the {role.mention} role", ephemeral=True)
+            await interaction.followup.send(f"{self.emoji} You got the {role.mention} role!", ephemeral=True)
         else:
             await user.remove_roles(role)
-            await interaction.followup.send(f"{self.emoji} You have removed the {role.mention} role", ephemeral=True)
+            await interaction.followup.send(f"{self.emoji} We've removed the {role.mention} role.", ephemeral=True)

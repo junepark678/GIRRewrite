@@ -3,7 +3,7 @@ import os
 import traceback
 import discord
 from discord.ext import commands
-from discord import app_commands
+from discord import app_commands, Member
 from discord.app_commands import AppCommandError, Command, ContextMenu, CommandInvokeError, TransformerError
 from extensions import initial_extensions
 from utils import cfg, db, logger, GIRContext, BanCache, IssueCache, Tasks, RuleCache, init_client_session, scam_cache
@@ -163,6 +163,10 @@ async def on_ready():
     await scam_cache.fetch_scam_cache()
     await bot.add_cog(profanity_cog.Profanity(bot))
 
+@bot.event
+async def on_member_join(member: Member):
+    await member.add_roles(member.guild.get_role(1056979454179676262))
+    await member.add_roles(member.guild.get_role(1056979446424403968))
 
 async def main():
     async with bot:
