@@ -9,7 +9,7 @@ from extensions import initial_extensions
 from utils import cfg, db, logger, GIRContext, BanCache, IssueCache, Tasks, RuleCache, init_client_session, scam_cache
 from utils.framework import PermissionsFailure, gatekeeper, find_triggered_filters
 from cogs.commands.context_commands import setup_context_commands
-#import cogs.commands.misc.music as music_cog
+import cogs.monitors.misc.profanity as profanity_cog
 
 from typing import Union
 from data.services.user_service import user_service
@@ -161,7 +161,7 @@ async def on_ready():
     await bot.issue_cache.fetch_issue_cache()
     await bot.rule_cache.fetch_rule_cache()
     await scam_cache.fetch_scam_cache()
-#    client.add_cog(music_cog.Music)
+    await bot.add_cog(profanity_cog.Profanity(bot))
 
 
 async def main():
