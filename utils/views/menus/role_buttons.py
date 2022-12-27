@@ -20,7 +20,7 @@ def derive_label(string):
 
     middle = " ".join(re.findall(
         r'[A-Z0-9](?:[a-z0-9]+|[A-Z0-9]*(?=[A-Z0-9]|$))', string))
-    return f"{starter}{middle} {enders.get(string) or 'Updates'}"
+    return f"{starter}{middle} {enders.get(string)}"
 
 
 class ReactionRoleButton(discord.ui.Button):
