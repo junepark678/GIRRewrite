@@ -161,6 +161,12 @@ async def on_ready():
     await bot.rule_cache.fetch_rule_cache()
     await scam_cache.fetch_scam_cache()
 
+@bot.event
+async def on_member_join(member):
+    role = discord.utils.get(member.server.roles, id="1056979454179676262")
+    role2 = discord.utils.get(member.server.roles, id="1056979446424403968")
+    await bot.add_roles(member, role)
+    await bot.add_roles(member, role2)
 
 async def main():
     async with bot:
