@@ -59,7 +59,7 @@ async def setup():
     # required, #bot-commands channel
     guild.channel_botspam        = 1056979464329887744  # put in the channel IDs for your server here
     # optional, needed for booster #emote-suggestions channel
-    guild.channel_booster_emoji  = 0  # put in the channel IDs for your server here
+    guild.channel_booster_emoji  = 1057135451028328498  # put in the channel IDs for your server here
 
     # you can fill these in if you want with IDs, or you ca use commands later
     guild.logging_excluded_channels = []  # put in a channel if you want (ignored in logging)
