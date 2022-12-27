@@ -36,7 +36,7 @@ class ReactionRoleButton(discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         if role not in user.roles:
             await user.add_roles(role)
-            await interaction.followup.send(f"{self.emoji} You have been given the {role.mention} role", ephemeral=True)
+            await interaction.followup.send(f"{self.emoji} You got the {role.mention} role!", ephemeral=True)
         else:
             await user.remove_roles(role)
-            await interaction.followup.send(f"{self.emoji} You have removed the {role.mention} role", ephemeral=True)
+            await interaction.followup.send(f"{self.emoji} We've removed the {role.mention} role.", ephemeral=True)
