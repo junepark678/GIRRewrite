@@ -17,7 +17,7 @@ class Profanity(commands.Cog):
             content = re.sub(' (fuck|shit|stupid)', '', content) # don't delete space in front
         author = message.author
         #content = message.content
-        if predictprob([content])[0] > 0.8:
+        if predictprob([content])[0] > 0.7:
             try:
                 await message.delete()
             except:
