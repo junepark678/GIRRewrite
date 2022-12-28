@@ -35,9 +35,5 @@ bs4==0.0.1
 ujson==4.2.0
 msgpack==1.0.2
 youtube-dl
-#profanity-check
-#git+https://github.com/vzhou842/profanity-check.git
-#git+https://github.com/vzhou842/profanity-check/tree/dependabot/pip/joblib-1.2.0
-#git+https://github.com/junepark678/profanity-check.git
-#git+https://github.com/rominf/profanity-filter
 git+https://github.com/dimitrismistriotis/alt-profanity-check.git
+regex
