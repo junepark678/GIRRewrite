@@ -1,6 +1,7 @@
 #import discord.ext.commands as commands
 from discord.ext import commands
 from profanity_check import predict, predict_prob
+import regex
 
 class Profanity(commands.Cog):
     def __init__(self, bot):
@@ -11,11 +12,12 @@ class Profanity(commands.Cog):
     #def on_message(self, message):
     #    asyncio.run(self.on_message_no(message))
     async def on_message(self, message):
-        if ('fuck' in message.content) or ('shit' in message.content) or ('stupid' in message.content):
-            return
-        author = message.author
         content = message.content
-        if predict([message.content])[0]:
+        if ('fuck' in message.content) or ('shit' in message.content) or ('stupid' in message.content):
+            content = re.sub(' (fuck|shit|stupid)', '', content) # don't delete space in front
+        author = message.author
+        #content = message.content
+        if predictprob([content])[0] > 0.8:
             try:
                 await message.delete()
             except:
