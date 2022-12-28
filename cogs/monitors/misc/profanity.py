@@ -1,4 +1,8 @@
-#import discord.ext.commands as commands
+##############################################################
+##                      UNUSED                              ##
+##      Code kinda broken, someone might fix later <3       ##
+##                    - PearlCodes                          ##
+##############################################################
 from discord.ext import commands
 from profanity_check import predict, predict_prob
 import regex
