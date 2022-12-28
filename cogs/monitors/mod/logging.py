@@ -78,7 +78,7 @@ class Logging(commands.Cog):
         embed.set_footer(text=member.id)
         await channel.send(embed=embed)
 
-    @commands.Cog.listener()
+    #@commands.Cog.listener()
     async def on_reaction_add(self, reaction: discord.Reaction, member: discord.User):
         if reaction.message.guild is None:
             return
