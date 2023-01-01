@@ -79,7 +79,8 @@ class Logging(commands.Cog):
         await channel.send(embed=embed)
 
     #@commands.Cog.listener()
-    async def on_reaction_add(self, reaction: discord.Reaction, member: discord.User):
+    @staticmethod
+    async def on_reaction_add(reaction: discord.Reaction, member: discord.User):
         if reaction.message.guild is None:
             return
         if reaction.message.guild.id != cfg.guild_id:
@@ -311,7 +312,8 @@ class Logging(commands.Cog):
 
         await channel.send(embed=embed)
 
-    async def on_member_kick(self, action: discord.AuditLogEntry, channel: discord.TextChannel):
+    @staticmethod
+    async def on_member_kick(action: discord.AuditLogEntry, channel: discord.TextChannel):
         embed = discord.Embed(title="Member Left")
         embed.color = discord.Color.purple()
         embed.add_field(
@@ -366,7 +368,8 @@ class Logging(commands.Cog):
             await self.member_roles_update(member=after, roles=removed_roles, added=False)
             return
 
-    async def member_nick_update(self, before, after):
+    @staticmethod
+    async def member_nick_update(before, after):
         embed = discord.Embed(title="Member Renamed")
         embed.color = discord.Color.orange()
         embed.set_thumbnail(url=after.display_avatar)
@@ -384,7 +387,8 @@ class Logging(commands.Cog):
         if private:
             await private.send(embed=embed)
 
-    async def member_roles_update(self, member, roles, added):
+    @staticmethod
+    async def member_roles_update(member, roles, added):
         embed = discord.Embed()
         if added:
             embed.title = "Member Role Added"
@@ -411,7 +415,8 @@ class Logging(commands.Cog):
         if private:
             await private.send(embed=embed)
 
-    async def member_timeout_update(self, before: discord.Member, after: discord.Member):
+    @staticmethod
+    async def member_timeout_update(before: discord.Member, after: discord.Member):
         embed = discord.Embed()
         if before.timed_out_until is not None and after.timed_out_until is None:
             embed.title = "Member Timeout Removed"

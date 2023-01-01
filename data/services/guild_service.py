@@ -2,7 +2,8 @@ from data.model import FilterWord, Guild, Tag, Giveaway
 from utils import cfg
 
 class GuildService:
-    def get_guild(self) -> Guild:
+    @staticmethod
+    def get_guild() -> Guild:
         """Returns the state of the main guild from the database.
 
         Returns
@@ -13,13 +14,16 @@ class GuildService:
 
         return Guild.objects(_id=cfg.guild_id).first()
     
-    def add_tag(self, tag: Tag) -> None:
+    @staticmethod
+    def add_tag(tag: Tag) -> None:
         Guild.objects(_id=cfg.guild_id).update_one(push__tags=tag)
 
-    def remove_tag(self, tag: str):
+    @staticmethod
+    def remove_tag(tag: str):
         return Guild.objects(_id=cfg.guild_id).update_one(pull__tags__name=Tag(name=tag).name)
 
-    def edit_tag(self, tag):
+    @staticmethod
+    def edit_tag(tag):
         return Guild.objects(_id=cfg.guild_id, tags__name=tag.name).update_one(set__tags__S=tag)
 
     def get_tag(self, name: str):
@@ -30,13 +34,16 @@ class GuildService:
         self.edit_tag(tag)
         return tag
 
-    def add_meme(self, meme: Tag) -> None:
+    @staticmethod
+    def add_meme(meme: Tag) -> None:
         Guild.objects(_id=cfg.guild_id).update_one(push__memes=meme)
 
-    def remove_meme(self, meme: str):
+    @staticmethod
+    def remove_meme(meme: str):
         return Guild.objects(_id=cfg.guild_id).update_one(pull__memes__name=Tag(name=meme).name)
 
-    def edit_meme(self, meme):
+    @staticmethod
+    def edit_meme(meme):
         return Guild.objects(_id=cfg.guild_id, memes__name=meme.name).update_one(set__memes__S=meme)
 
     def get_meme(self, name: str):
@@ -47,7 +54,8 @@ class GuildService:
         self.edit_meme(meme)
         return meme
     
-    def inc_caseid(self) -> None:
+    @staticmethod
+    def inc_caseid() -> None:
         """Increments Guild.case_id, which keeps track of the next available ID to
         use for a case.
         """
@@ -87,7 +95,8 @@ class GuildService:
             g.reaction_role_mapping.pop(str(id))
             g.save()
     
-    def get_giveaway(self, _id: int) -> Giveaway:
+    @staticmethod
+    def get_giveaway(_id: int) -> Giveaway:
         """
         Return the Document representing a giveaway, whose ID (message ID) is given by `id`
         If the giveaway doesn't exist in the database, then None is returned.
@@ -103,7 +112,8 @@ class GuildService:
         giveaway = Giveaway.objects(_id=_id).first()
         return giveaway
     
-    def add_giveaway(self, id: int, channel: int, name: str, entries: list, winners: int, ended: bool = False, prev_winners=[]) -> None:
+    @staticmethod
+    def add_giveaway(id: int, channel: int, name: str, entries: list, winners: int, ended: bool = False, prev_winners=[]) -> None:
         """
         Add a giveaway to the database.
         Parameters
@@ -136,10 +146,12 @@ class GuildService:
         Guild.objects(_id=cfg.guild_id).update_one(push__raid_phrases=FilterWord(word=phrase, bypass=5, notify=True))
         return True
     
-    def remove_raid_phrase(self, phrase: str):
+    @staticmethod
+    def remove_raid_phrase(phrase: str):
         Guild.objects(_id=cfg.guild_id).update_one(pull__raid_phrases__word=FilterWord(word=phrase).word)
 
-    def set_spam_mode(self, mode) -> None:
+    @staticmethod
+    def set_spam_mode(mode) -> None:
         Guild.objects(_id=cfg.guild_id).update_one(set__ban_today_spam_accounts=mode)
 
     def add_filtered_word(self, fw: FilterWord) -> None:
@@ -150,13 +162,16 @@ class GuildService:
         Guild.objects(_id=cfg.guild_id).update_one(push__filter_words=fw)
         return True
 
-    def remove_filtered_word(self, word: str):
+    @staticmethod
+    def remove_filtered_word(word: str):
         return Guild.objects(_id=cfg.guild_id).update_one(pull__filter_words__word=FilterWord(word=word).word)
 
-    def update_filtered_word(self, word: FilterWord):
+    @staticmethod
+    def update_filtered_word(word: FilterWord):
         return Guild.objects(_id=cfg.guild_id, filter_words__word=word.word).update_one(set__filter_words__S=word)
 
-    def add_whitelisted_guild(self, id: int):
+    @staticmethod
+    def add_whitelisted_guild(id: int):
         g = Guild.objects(_id=cfg.guild_id)
         g2 = g.first()
         if id not in g2.filter_excluded_guilds:
@@ -164,7 +179,8 @@ class GuildService:
             return True
         return False
 
-    def remove_whitelisted_guild(self, id: int):
+    @staticmethod
+    def remove_whitelisted_guild(id: int):
         g = Guild.objects(_id=cfg.guild_id)
         g2 = g.first()
         if id in g2.filter_excluded_guilds:
@@ -172,7 +188,8 @@ class GuildService:
             return True
         return False
 
-    def add_ignored_channel(self, id: int):
+    @staticmethod
+    def add_ignored_channel(id: int):
         g = Guild.objects(_id=cfg.guild_id)
         g2 = g.first()
         if id not in g2.filter_excluded_channels:
@@ -180,7 +197,8 @@ class GuildService:
             return True
         return False
 
-    def remove_ignored_channel(self, id: int):
+    @staticmethod
+    def remove_ignored_channel(id: int):
         g = Guild.objects(_id=cfg.guild_id)
         g2 = g.first()
         if id in g2.filter_excluded_channels:
@@ -188,7 +206,8 @@ class GuildService:
             return True
         return False
 
-    def add_ignored_channel_logging(self, id: int):
+    @staticmethod
+    def add_ignored_channel_logging(id: int):
         g = Guild.objects(_id=cfg.guild_id)
         g2 = g.first()
         if id not in g2.logging_excluded_channels:
@@ -196,7 +215,8 @@ class GuildService:
             return True
         return False
 
-    def remove_ignored_channel_logging(self, id: int):
+    @staticmethod
+    def remove_ignored_channel_logging(id: int):
         g = Guild.objects(_id=cfg.guild_id)
         g2 = g.first()
         if id in g2.logging_excluded_channels:
@@ -207,13 +227,16 @@ class GuildService:
     def get_locked_channels(self):
         return self.get_guild().locked_channels
 
-    def add_locked_channels(self, channel):
+    @staticmethod
+    def add_locked_channels(channel):
         Guild.objects(_id=cfg.guild_id).update_one(push__locked_channels=channel)
 
-    def remove_locked_channels(self, channel):
+    @staticmethod
+    def remove_locked_channels(channel):
         Guild.objects(_id=cfg.guild_id).update_one(pull__locked_channels=channel)
 
-    def set_nsa_mapping(self, channel_id, webhooks):
+    @staticmethod
+    def set_nsa_mapping(channel_id, webhooks):
         guild = Guild.objects(_id=cfg.guild_id).first()
         guild.nsa_mapping[str(channel_id)] = webhooks
         guild.save()

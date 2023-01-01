@@ -66,7 +66,8 @@ class Blootooth(commands.Cog):
         logger.info(f"Added new webhook for channel {channel.name} ({channel.id}: {webhook}")
         return webhook
 
-    async def prepare_message_body(self, message: discord.Message):
+    @staticmethod
+    async def prepare_message_body(message: discord.Message):
         member = message.author
         body = {
             "username": str(member),

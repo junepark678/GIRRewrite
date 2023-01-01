@@ -58,7 +58,8 @@ class Xp(commands.Cog):
         roles_to_add = self.assess_new_roles(new_level, db_guild)
         await self.add_new_roles(message, roles_to_add)
 
-    def assess_new_roles(self, new_level, db):
+    @staticmethod
+    def assess_new_roles(new_level, db):
         roles_to_add = []
         if 15 <= new_level:
             roles_to_add.append(db.role_memberplus)
@@ -73,7 +74,8 @@ class Xp(commands.Cog):
 
         return roles_to_add
 
-    async def add_new_roles(self, obj, roles_to_add):
+    @staticmethod
+    async def add_new_roles(obj, roles_to_add):
         if roles_to_add is None:
             return
 
@@ -85,7 +87,8 @@ class Xp(commands.Cog):
             role) is not None and member.guild.get_role(role) not in member.roles]
         await member.add_roles(*roles_to_add, reason="XP roles")
 
-    def get_level(self, current_xp):
+    @staticmethod
+    def get_level(current_xp):
         level = 0
         xp = 0
         while xp <= current_xp:

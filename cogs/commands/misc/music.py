@@ -681,7 +681,8 @@ class SearchMenu(discord.ui.Select):
             max_values=1,
             options=options
         )
-    async def respond(self, message_reply, message: str=None, color=discord.Embed.Empty, embed=None, reply: bool=True, view=None):
+    @staticmethod
+    async def respond(message_reply, message: str=None, color=discord.Embed.Empty, embed=None, reply: bool=True, view=None):
         if useEmbed:
             if embed is None:
                 embed = discord.Embed(title=message, color=color)
@@ -955,7 +956,8 @@ class Music(commands.Cog):
 
     # Function for responding to the user
     # reply=True will cause the bot to reply to the user (discord function)
-    async def respond(self, ctx, message: str=None, color=discord.Embed.Empty, embed=None, reply: bool=True, view=None):
+    @staticmethod
+    async def respond(ctx, message: str=None, color=discord.Embed.Empty, embed=None, reply: bool=True, view=None):
         if useEmbed:
             if embed is None:
                 embed = discord.Embed(title=message, color=color)
@@ -1013,7 +1015,8 @@ class Music(commands.Cog):
             pass
 
     # All commands from this cog cannot be used in DM
-    def cog_check(self, ctx):
+    @staticmethod
+    def cog_check(ctx):
         if not ctx.guild:
             raise commands.NoPrivateMessage(loc["error"]["no_pm"])
         return True
@@ -1029,7 +1032,8 @@ class Music(commands.Cog):
 
     # Return a meaningful message to user when error occurs
     # If debug log is enabled, return the traceback for debugging use. The debug message is encoded in base64 in case leaking the directory info
-    async def cog_command_error(self, ctx, error):
+    @staticmethod
+    async def cog_command_error(ctx, error):
         formatted_error = traceback.format_exc()
         if str(error) == loc["error"]["no_pm"]:
             return await ctx.send(loc["error"]["no_pm"])

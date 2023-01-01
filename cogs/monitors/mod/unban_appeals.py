@@ -94,7 +94,8 @@ class UnbanAppeals(commands.Cog):
 
         await thread.send(unban_id)
 
-    async def generate_userinfo(self, appealer: discord.User):
+    @staticmethod
+    async def generate_userinfo(appealer: discord.User):
         results = user_service.get_user(appealer.id)
 
         embed = discord.Embed(title=f"User Information",
@@ -114,7 +115,8 @@ class UnbanAppeals(commands.Cog):
                         value=f"{format_dt(appealer.created_at, style='F')} ({format_dt(appealer.created_at, style='R')})", inline=True)
         return embed
 
-    async def generate_cases(self, appealer: discord.User):
+    @staticmethod
+    async def generate_cases(appealer: discord.User):
         results = user_service.get_cases(appealer.id)
         if not results.cases:
             return None

@@ -2,7 +2,8 @@ from typing import Counter
 from data.model import Case, Cases, User
 
 class UserService:
-    def get_user(self, id: int) -> User:
+    @staticmethod
+    def get_user(id: int) -> User:
         """Look up the User document of a user, whose ID is given by `id`.
         If the user doesn't have a User document in the database, first create that.
 
@@ -25,10 +26,12 @@ class UserService:
             user.save()
         return user
     
-    def leaderboard(self) -> list:
+    @staticmethod
+    def leaderboard() -> list:
         return User.objects[0:130].only('_id', 'xp').order_by('-xp', '-_id').select_related()
 
-    def leaderboard_rank(self, xp):
+    @staticmethod
+    def leaderboard_rank(xp):
         users = User.objects().only('_id', 'xp')
         overall = users().count()
         rank = users(xp__gte=xp).count()
@@ -66,7 +69,8 @@ class UserService:
         self.get_user(id)
         User.objects(_id=id).update_one(inc__level=1)
     
-    def get_cases(self, id: int) -> Cases:
+    @staticmethod
+    def get_cases(id: int) -> Cases:
         """Return the Document representing the cases of a user, whose ID is given by `id`
         If the user doesn't have a Cases document in the database, first create that.
 
@@ -123,7 +127,8 @@ class UserService:
         User.objects(_id=_id).update_one(set__was_warn_kicked=True)
 
 
-    def rundown(self, id: int) -> list:
+    @staticmethod
+    def rundown(id: int) -> list:
         """Return the 3 most recent cases of a user, whose ID is given by `id`
         If the user doesn't have a Cases document in the database, first create that.
 
@@ -152,7 +157,8 @@ class UserService:
         cases.reverse()
         return cases[0:3]
 
-    def retrieve_birthdays(self, date):
+    @staticmethod
+    def retrieve_birthdays(date):
         return User.objects(birthday=date)
     
     def transfer_profile(self, oldmember, newmember):
@@ -175,7 +181,8 @@ class UserService:
         
         return u, len(cases.cases)
     
-    def fetch_raids(self):
+    @staticmethod
+    def fetch_raids():
         values = {}
         values["Join spam"] = Cases.objects(cases__reason__contains="Join spam detected").count()
         values["Join spam over time"] = Cases.objects(cases__reason__contains="Join spam over time detected").count()
@@ -185,7 +192,8 @@ class UserService:
         
         return values
 
-    def fetch_cases_by_mod(self, _id):
+    @staticmethod
+    def fetch_cases_by_mod(_id):
         values = {}
         cases = Cases.objects(cases__mod_id=str(_id))
         values["total"] = 0
@@ -206,7 +214,8 @@ class UserService:
         values["counts"].reverse()
         return values
 
-    def fetch_cases_by_keyword(self, keyword):
+    @staticmethod
+    def fetch_cases_by_keyword(keyword):
         values = {}
         cases = Cases.objects(cases__reason__contains=keyword)
         cases = list(cases.all())

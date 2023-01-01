@@ -374,7 +374,8 @@ class AntiRaidMonitor(commands.Cog):
                 log.set_thumbnail(url=user.display_avatar)
                 await public_logs.send(embed=log)
 
-    async def freeze_server(self, guild):
+    @staticmethod
+    async def freeze_server(guild):
         """Freeze all channels marked as freezeable during a raid, meaning only people with the Member+ role and up
         can talk (temporarily lock out whitenames during a raid)"""
 

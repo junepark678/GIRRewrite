@@ -90,7 +90,8 @@ class TagModal(discord.ui.Modal):
         except:
             pass
         
-    async def send_error(self, interaction: discord.Interaction, error: str):
+    @staticmethod
+    async def send_error(interaction: discord.Interaction, error: str):
         embed = discord.Embed(title=":(\nYour command ran into a problem", description=error, color=discord.Color.red())
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
@@ -178,6 +179,7 @@ class EditTagModal(discord.ui.Modal):
         except:
             pass
 
-    async def send_error(self, interaction: discord.Interaction, error: str):
+    @staticmethod
+    async def send_error(interaction: discord.Interaction, error: str):
         embed = discord.Embed(title=":(\nYour command ran into a problem", description=error, color=discord.Color.red())
         await interaction.response.send_message(embed=embed, ephemeral=True)

@@ -182,7 +182,8 @@ class GIRContext:
             if not kwargs.get("ephemeral") and delete_after is not None:
                 self.bot.loop.create_task(self.delay_delete(self.interaction, delete_after))
 
-    async def delay_delete(self, ctx: discord.Interaction, delay: int):
+    @staticmethod
+    async def delay_delete(ctx: discord.Interaction, delay: int):
         try:
             await asyncio.sleep(delay)
             await ctx.delete_original_message()

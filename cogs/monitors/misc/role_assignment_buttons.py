@@ -170,7 +170,8 @@ class RoleAssignButtons(commands.Cog):
             await message.edit(view=view)
         await ctx.send_success(title="Added new reaction!", description=resulting_reactions_list)
 
-    async def prompt_for_reaction(self, ctx: GIRContext, reactions):
+    @staticmethod
+    async def prompt_for_reaction(ctx: GIRContext, reactions):
         text = "Please add the reaction to this message that you want to watch for (or :white_check_mark: to finish or cancel if nothing set so far)"
         if reactions:
             text += "\n\n**Current reactions**"
@@ -188,7 +189,8 @@ class RoleAssignButtons(commands.Cog):
         reaction, _ = await ctx.prompt_reaction(prompt_reaction)
         return reaction
 
-    async def prompt_for_role(self, ctx, current_reaction, reactions):
+    @staticmethod
+    async def prompt_for_role(ctx, current_reaction, reactions):
         text = f"Please enter a role ID to use for {current_reaction} (or 'cancel' to stop)"
         if reactions:
             text += "\n\n**Current reactions**"
