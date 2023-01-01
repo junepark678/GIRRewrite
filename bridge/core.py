@@ -503,7 +503,8 @@ def has_permissions(**perms: dict[str, bool]):
 class MentionableConverter(Converter):
     """A converter that can convert a mention to a user or a role."""
 
-    async def convert(self, ctx, argument):
+    @staticmethod
+    async def convert(ctx, argument):
         try:
             return await RoleConverter().convert(ctx, argument)
         except BadArgument:
@@ -511,7 +512,8 @@ class MentionableConverter(Converter):
 
 
 class AttachmentConverter(Converter):
-    async def convert(self, ctx: Context, arg: str):
+    @staticmethod
+    async def convert(ctx: Context, arg: str):
         try:
             attach = ctx.message.attachments[0]
         except IndexError:

@@ -147,14 +147,16 @@ class BoosterEmojis(commands.Cog):
         else:
             return None, None
 
-    async def add_reactions(self, good: bool, msg: discord.Message):
+    @staticmethod
+    async def add_reactions(good: bool, msg: discord.Message):
         if good:
             await msg.add_reaction('✅')
             await msg.add_reaction('❌')
         else:
             await msg.add_reaction('❓')
 
-    async def do_content_parsing(self, url):
+    @staticmethod
+    async def do_content_parsing(url):
         async with aiohttp.ClientSession() as session:
             async with session.head(url) as resp:
                 if resp.status != 200:

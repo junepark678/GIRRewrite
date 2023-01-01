@@ -220,7 +220,8 @@ class Memes(commands.Cog):
         guild_service.remove_meme(name)
         await ctx.send_warning(f"Deleted meme `{meme.name}`.", delete_after=5)
 
-    async def prepare_meme_embed(self, meme):
+    @staticmethod
+    async def prepare_meme_embed(meme):
         """Given a meme object, prepare the appropriate embed for it
 
         Parameters

@@ -286,7 +286,8 @@ class ModUtils(commands.Cog):
                               description=f"In {ctx.channel.mention} {ctx.author.mention} said:\n\n{message}")
         await logging_channel.send(embed=embed)
 
-    async def prepare_rundown_embed(self, ctx: GIRContext, user):
+    @staticmethod
+    async def prepare_rundown_embed(ctx: GIRContext, user):
         user_info = user_service.get_user(user.id)
         rd = user_service.rundown(user.id)
         rd_text = ""

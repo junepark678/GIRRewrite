@@ -74,7 +74,8 @@ class FixSocials(commands.Cog):
         await asyncio.sleep(0.5)
         await message.edit(suppress=True)
 
-    async def fix_instagram(self, message: discord.Message, link: str):
+    @staticmethod
+    async def fix_instagram(message: discord.Message, link: str):
         link = link.replace("www.", "")
         link = link.replace("instagram.com", "ddinstagram.com")
 
@@ -83,7 +84,8 @@ class FixSocials(commands.Cog):
         await asyncio.sleep(0.5)
         await message.edit(suppress=True)
 
-    async def fix_twitter(self, message: discord.Message, link: str):
+    @staticmethod
+    async def fix_twitter(message: discord.Message, link: str):
         link = link.replace("www.", "")
         link = link.replace("twitter.com", "fxtwitter.com")
 

@@ -65,11 +65,13 @@ class Config:
             f"GIR will be running in: {self.guild_id} in \033[1m{'DEVELOPMENT' if self.dev else 'PRODUCTION'}\033[0m mode")
         logger.info(f"Bot owned by: {self.owner_id}")
 
-    def setup_warning(self, k: str):
+    @staticmethod
+    def setup_warning(k: str):
         logger.warn(
             '.env file does not have key {}. Some features may not function as intended.'.format(k))
 
-    def setup_error(self, k: str):
+    @staticmethod
+    def setup_error(k: str):
         logger.error(
             '.env file is not correctly set up! Missing key {}'.format(k))
         exit(1)

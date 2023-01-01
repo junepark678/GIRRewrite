@@ -214,7 +214,8 @@ class iOSCFW(commands.Cog):
         embed, view = await self.do_firmware_response(ctx, matching_ios)
         await ctx.respond(embed=embed, view=view, ephemeral=ctx.whisper)
 
-    async def do_firmware_response(self, ctx, matching_ios):
+    @staticmethod
+    async def do_firmware_response(ctx, matching_ios):
         embed = discord.Embed(
             title=f"{matching_ios.get('osStr')} {matching_ios.get('version')}")
         embed.add_field(name="Build number",

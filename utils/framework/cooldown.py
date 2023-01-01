@@ -9,7 +9,8 @@ things like cooldown on individual `Tags`, or message spam detection.
 class MessageTextBucket(commands.BucketType):
     custom = 7
     
-    def get_key(self, text):
+    @staticmethod
+    def get_key(text):
         return text
         
     def __call__(self, msg):

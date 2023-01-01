@@ -94,7 +94,8 @@ class Filter(commands.Cog):
 
         await self.detect_cij_or_eta(message, db_guild)
 
-    async def nick_filter(self, member):
+    @staticmethod
+    async def nick_filter(member):
         triggered_words = find_triggered_filters(
             member.display_name, member)
 
@@ -237,7 +238,8 @@ class Filter(commands.Cog):
             except Exception:
                 return
 
-    async def do_filter_notify(self, message: discord.Message, word):
+    @staticmethod
+    async def do_filter_notify(message: discord.Message, word):
         member = message.author
         channel = message.channel
         message_to_user = f"Your message contained a word you aren't allowed to say in {member.guild.name}. This could be either hate speech or the name of a piracy tool/source. Please refrain from saying it!"
@@ -268,7 +270,8 @@ class Filter(commands.Cog):
         if log_channel is not None:
             await log_channel.send(embed=log_embed)
 
-    async def delete(self, message):
+    @staticmethod
+    async def delete(message):
         try:
             await message.delete()
         except Exception:

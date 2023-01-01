@@ -70,7 +70,8 @@ class WebhookLogger(logging.Handler):
         self.webhook_url = os.environ.get("LOGGING_WEBHOOK_URL")
         self.record_formatter = logging.Formatter()
         
-    def prefixcalc(self, levelname: str):
+    @staticmethod
+    def prefixcalc(levelname: str):
         if levelname == 'DEBUG':
             return '```bash#| '
         elif levelname == 'INFO':
@@ -84,7 +85,8 @@ class WebhookLogger(logging.Handler):
         else:
             return '```  |'
 
-    def suffixcalc(self, levelname: str):
+    @staticmethod
+    def suffixcalc(levelname: str):
         if levelname == 'DEBUG':
             return '  ]```'
         elif levelname == 'WARNING':

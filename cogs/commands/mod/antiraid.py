@@ -222,7 +222,8 @@ class AntiRaid(commands.Cog):
         else:
             raise commands.BadArgument("Server is already unlocked or my permissions are wrong.")
 
-    async def lock_unlock_channel(self,  ctx: GIRContext, channel, lock=None):
+    @staticmethod
+    async def lock_unlock_channel(ctx: GIRContext, channel, lock=None):
         db_guild = guild_service.get_guild()
         
         default_role = ctx.guild.default_role

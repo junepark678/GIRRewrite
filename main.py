@@ -51,7 +51,8 @@ class MyTree(app_commands.CommandTree):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    async def interaction_check(self, interaction: discord.Interaction):
+    @staticmethod
+    async def interaction_check(interaction: discord.Interaction):
         if interaction.user.bot:
             return False
 

@@ -221,11 +221,13 @@ class TweakDropdown(discord.ui.Select):
         else:
             await self.ctx.message.edit(view=self._view)
 
-    async def format_tweak_page(self, entry):
+    @staticmethod
+    async def format_tweak_page(entry):
         embed = tweak_embed_format(entry)
         return embed
 
-    def generate_buttons(self, entry):
+    @staticmethod
+    def generate_buttons(entry):
         repo = entry.get('repository').get('uri')
         depiction = entry.get('depiction')
 
@@ -353,7 +355,8 @@ class JumpModal(discord.ui.Modal):
             label="Page", placeholder=f"Between 1 and {max_page}")
         self.add_item(self.page)
 
-    async def on_submit(self, interaction: discord.Interaction):
+    @staticmethod
+    async def on_submit(interaction: discord.Interaction):
         try:
             await interaction.response.send_message()
         except:
